@@ -61,4 +61,20 @@ public class Reflection {
 		return ClassReflection.forName( name );
 	}
 	
+	public static java.util.Set<Class<?>> getInterfaces( Class<?> cl ) {
+		java.util.Set<Class<?>> result = new java.util.HashSet<>();
+		return getInterfaces( cl, result );
+	}
+
+	public static java.util.Set<Class<?>> getInterfaces( Class<?> cl, java.util.Set<Class<?>> result ) {
+		for (Class<?> intf : ClassReflection.getInterfaces(cl)) {
+			if (result.add(intf)) {
+				getInterfaces(intf, result);
+			}
+		}
+		if (cl.getSuperclass() != null) {
+			getInterfaces(cl.getSuperclass(), result);
+		}
+		return result;
+	}
 }
