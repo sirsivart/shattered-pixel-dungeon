@@ -70,9 +70,6 @@ public class ShatteredNews extends NewsService {
 					}
 					article.summary = xmlArticle.get("summary");
 					article.URL = xmlArticle.getChildByName("link").getAttribute("href");
-					if (!preferHTTPS) {
-						article.URL = article.URL.replace("https://", "http://");
-					}
 
 					Pattern versionCodeMatcher = Pattern.compile("v[0-9]+");
 					try {
